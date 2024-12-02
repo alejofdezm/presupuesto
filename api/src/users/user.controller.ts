@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 
+
 @ApiTags('users') 
 @Controller('users')
 export class UserController {
@@ -10,7 +11,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Retrieve all users' })
   @ApiResponse({ status: 200, description: 'List of all users', type: [User] })
-  @Get("getall")
+  @Get('getall')
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
@@ -18,10 +19,7 @@ export class UserController {
   @ApiOperation({ summary: 'Add a new user' })
   @ApiResponse({ status: 201, description: 'User successfully created', type: User })
   @Post()
-  async addUser(
-    @Body('name') name: string,
-    @Body('email') email: string,
-  ): Promise<User> {
-    return this.userService.addUser(name, email);
+  async addUser(@Body() createUserDto: User): Promise<User> {
+    return this.userService.addUser(createUserDto.name, createUserDto.email);
   }
 }
