@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './users/user.module';
-
+import { UserModule } from './users/user.module'; 
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -15,9 +15,11 @@ import { UserModule } from './users/user.module';
       useNewUrlParser: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
-    UserModule,
+    UserModule,AuthModule
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    
+  ],
 })
 export class AppModule {}
